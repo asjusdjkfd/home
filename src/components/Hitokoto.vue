@@ -41,15 +41,15 @@ const openMusicShow = ref(false);
 // 一言数据
 const hitokotoData = reactive({
   text: "这里应该显示一句话",
-  from: "無名",
+  from: "senru",
 });
 
 // 获取一言数据
 const getHitokotoData = async () => {
   try {
     const result = await getHitokoto();
-    hitokotoData.text = result.hitokoto;
-    hitokotoData.from = result.from;
+    hitokotoData.text = result.data.content; // 使用 content 字段
+    hitokotoData.from = result.data.form; // 使用 form 字段
   } catch (error) {
     ElMessage({
       message: "一言获取失败",
@@ -59,7 +59,7 @@ const getHitokotoData = async () => {
       }),
     });
     hitokotoData.text = "这里应该显示一句话";
-    hitokotoData.from = "無名";
+    hitokotoData.from = "senru";
   }
 };
 
